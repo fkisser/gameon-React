@@ -9,14 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiArrowBack, BiSolidTrash } from "react-icons/bi";
 import CartItem from "./CartItem";
 import Button from "../../UI/Button/Button";
-import { clearCart, toggleHiddenCart } from "../../../redux/cart/cartSlice";
-import {
-	openConfirm,
-	setIsConfirm,
-	setMessage,
-	toggleModal,
-} from "../../../redux/modal/modalSlice";
-import { addItems } from "../../../redux/checkout/checkoutSlice";
+import { toggleHiddenCart } from "../../../redux/cart/cartSlice";
+import { openConfirm } from "../../../redux/modal/modalSlice";
 
 const Cart = () => {
 	const dispatch = useDispatch();
@@ -74,8 +68,7 @@ const Cart = () => {
 					whileTap={{ scale: 0.95 }}
 					onClick={() => {
 						const msj = "Desea realizar la compra?",
-							fun = "buy";
-						dispatch(addItems([...cartItems]));
+							fun = "checkout";
 						dispatch(
 							openConfirm({
 								msj,

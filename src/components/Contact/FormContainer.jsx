@@ -1,7 +1,7 @@
 import React from "react";
 import { FormContainerStyled, FormStyled } from "./ContactStyles";
 import Button from "../UI/Button/Button";
-import { Formik, useFormik } from "formik";
+import { Formik } from "formik";
 import Input from "../UI/Inputs/Input";
 import TextArea from "../UI/Inputs/TextArea";
 import * as Yup from "yup";

@@ -3,7 +3,6 @@ import ContactImage from "./img/contact.jpg";
 import ImgContainer from "./ImgContainer";
 import FormContainer from "./FormContainer";
 import { ContactContainerStyled, ContactContentStyled } from "./ContactStyles";
-import Button from "../UI/Button/Button";
 
 const Contact = () => {
 	return (

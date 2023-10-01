@@ -31,10 +31,12 @@ const Modal = () => {
 							case "clearCart":
 								dispatch(clearCart());
 								break;
-							case "buy":
-								dispatch(clearCart());
+							case "checkout":
 								navigate("/checkout");
 								dispatch(toggleHiddenCart());
+								break;
+							case "buy":
+								dispatch(clearCart());
 								break;
 							default:
 								break;

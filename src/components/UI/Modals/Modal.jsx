@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 import {
 	clearCart,
 	removeItem,
+	success,
 	toggleHiddenCart,
 } from "../../../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
@@ -37,6 +38,11 @@ const Modal = () => {
 								break;
 							case "buy":
 								dispatch(clearCart());
+								break;
+							case "success":
+								dispatch(success());
+								dispatch(clearCart());
+								navigate("/success");
 								break;
 							default:
 								break;

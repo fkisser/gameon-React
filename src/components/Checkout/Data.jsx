@@ -40,7 +40,7 @@ const Data = () => {
 				validationSchema={validationSchema}
 				onSubmit={({ resetForm }) => {
 					const msj = "Desea confirmar su compra?",
-						fun = "clearCart";
+						fun = "success";
 					dispatch(
 						openConfirm({
 							msj,

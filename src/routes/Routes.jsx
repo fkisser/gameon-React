@@ -6,6 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import ErrorPage from "../pages/ErrorPage";
 import ContactPage from "../pages/ContactPage";
 import CheckoutPage from "../pages/CheckoutPage";
+import SuccessPage from "../pages/SuccessPage";
 
 const Routes = () => {
 	return (
@@ -31,6 +32,10 @@ const Routes = () => {
 					<Route
 						path="checkout"
 						element={<CheckoutPage />}
+					/>
+					<Route
+						path="success"
+						element={<SuccessPage />}
 					/>
 					<Route
 						path="*"

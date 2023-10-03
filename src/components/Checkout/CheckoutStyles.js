@@ -90,16 +90,10 @@ export const ErrorStyled = styled.div`
   text-align: center;
   padding: 1rem;
   gap: 1rem;
-  .group{
-    display:flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    @media (max-width: 576px) {
-        font-size: small;
-    }
-    > a{
-      width: fit-content;
-    }
+  @media (min-width: 1200px) {
+        font-size: xx-large;
   }
+`;
+export const SuccessStyled = styled(ErrorStyled)`
+  color: var('--selective-yellow');
 `;

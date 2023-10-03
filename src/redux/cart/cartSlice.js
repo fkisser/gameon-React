@@ -3,7 +3,8 @@ import { addProduct, removeProduct } from "./cartUtils";
 
 const INITIAL_STATE = {
   cartItems: [],
-  open: false
+  open: false,
+  success: false
 }
 
 const cartSlice = createSlice({
@@ -39,12 +40,24 @@ const cartSlice = createSlice({
         ...state,
         open: !state.open
       }
+    },
+    success: (state) => {
+      return {
+        ...state,
+        success: true
+      }
+    },
+    noSuccess: (state) => {
+      return {
+        ...state,
+        success: false
+      }
     }
   }
 })
 
 export const {
-  addItem, removeItem, clearCart, toggleHiddenCart, addItems
+  addItem, removeItem, clearCart, toggleHiddenCart, addItems, success, noSuccess
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

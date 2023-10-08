@@ -7,6 +7,11 @@ import ErrorPage from "../pages/ErrorPage";
 import ContactPage from "../pages/ContactPage";
 import CheckoutPage from "../pages/CheckoutPage";
 import SuccessPage from "../pages/SuccessPage";
+import ProductPage from "../pages/ProductPage";
+import ProtectedRoute from "../components/ProtectedRoute/ProtectedRoute";
+import UserPage from "../pages/UserPage";
+import LoginPage from "../pages/LoginPage";
+import RegisterPage from "../pages/RegisterPage";
 
 const Routes = () => {
 	return (
@@ -17,10 +22,16 @@ const Routes = () => {
 						path="/"
 						element={<HomePage />}
 					/>
-					<Route
-						path="products"
-						element={<ProductsPage />}
-					/>
+					<Route path="products">
+						<Route
+							index
+							element={<ProductsPage />}
+						/>
+						<Route
+							path=":id"
+							element={<ProductPage />}
+						/>
+					</Route>
 					<Route
 						path="about"
 						element={<AboutPage />}
@@ -31,11 +42,35 @@ const Routes = () => {
 					/>
 					<Route
 						path="checkout"
-						element={<CheckoutPage />}
+						element={
+							<ProtectedRoute redirectTo={"/login"}>
+								<CheckoutPage />
+							</ProtectedRoute>
+						}
 					/>
 					<Route
 						path="success"
-						element={<SuccessPage />}
+						element={
+							<ProtectedRoute redirectTo={"/login"}>
+								<SuccessPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="user"
+						element={
+							<ProtectedRoute redirectTo={"/login"}>
+								<UserPage />
+							</ProtectedRoute>
+						}
+					/>
+					<Route
+						path="login"
+						element={<LoginPage />}
+					/>
+					<Route
+						path="register"
+						element={<RegisterPage />}
 					/>
 					<Route
 						path="*"

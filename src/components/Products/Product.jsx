@@ -8,7 +8,7 @@ import { closeModal, openModal } from "../../redux/modal/modalSlice";
 const Product = ({ title, description, price, url, id }) => {
 	const dispatch = useDispatch();
 	return (
-		<ProductCardStyled>
+		<ProductCardStyled to={`${id}`}>
 			<div className="image">
 				<img
 					src={url}

@@ -9,7 +9,7 @@ import {
 import Logo from "../UI/Logo/Logo";
 import { HiHome } from "react-icons/hi";
 import { FaUserAlt } from "react-icons/fa";
-import { FaMessage } from "react-icons/fa6";
+import { FaMessage, FaPersonWalkingArrowRight } from "react-icons/fa6";
 import { MdEmojiPeople } from "react-icons/md";
 import { BiSolidCategory } from "react-icons/bi";
 import { motion } from "framer-motion";
@@ -17,11 +17,15 @@ import MenuButton from "./MenuButton/MenuButton";
 import CartButton from "./CartButton/CartButton";
 import Overlay from "../UI/Overlay/Overlay";
 import Cart from "./Cart/Cart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modals/Modal";
+import { setCurrentUser } from "../../redux/user/userSlice";
+import Button from "../UI/Button/Button";
 
 const Navbar = () => {
 	const { open } = useSelector((state) => state.navbar);
+	const { currentUser } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
 	return (
 		<NavbarContainerStyled>
 			<Cart />
@@ -61,9 +65,19 @@ const Navbar = () => {
 							</motion.div>
 						</NavLinkStyled>
 
-						<UserNavLinkStyled to={"/login"}>
-							<span>Iniciar sesión</span>
+						<UserNavLinkStyled to={currentUser ? "/user" : "/login"}>
+							<span>
+								{currentUser ? `Hola ${currentUser}!` : "Iniciar sesión"}
+							</span>
 							<FaUserAlt />
+							{currentUser && (
+								<Button
+									onClick={() => {
+										currentUser ? dispatch(setCurrentUser(null)) : "";
+									}}>
+									Salir <FaPersonWalkingArrowRight />
+								</Button>
+							)}
 						</UserNavLinkStyled>
 					</LinksContainerStyled>
 

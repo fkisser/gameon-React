@@ -6,20 +6,24 @@ import categoriesReducer from "./categories/categoriesSlice";
 import productsReducer from "./products/productsSlice";
 import cartReducer from "./cart/cartSlice";
 import navbarReducer from "./navbar/navbarSlice";
-import modalReducer from "./modal/modalSlice"
+import modalReducer from "./modal/modalSlice";
+import checkoutReducer from "./checkout/checkoutSlice";
+import userReducer from "./user/userSlice"
 
 const reducers = combineReducers({
   categories: categoriesReducer,
   products: productsReducer,
   cart: cartReducer,
   navbar: navbarReducer,
-  modal: modalReducer
+  modal: modalReducer,
+  checkout: checkoutReducer,
+  user: userReducer
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"]
+  whitelist: ["cart", "user"]
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

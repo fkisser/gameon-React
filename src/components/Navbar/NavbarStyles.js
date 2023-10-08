@@ -40,7 +40,7 @@ export const LinksContainerStyled = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  @media(max-width: 992px) {
+  @media(max-width: 1024px) {
     padding: 2rem;
     flex-direction: column;
     justify-content: center;
@@ -72,7 +72,7 @@ export const NavLinkStyled = styled(NavLink)`
   background: none;
   border-radius: 1rem;
   gap: 5px;
-  @media(max-width: 992px) {
+  @media(max-width: 1024px) {
     width: 100%;
     font-size: x-large;
   }
@@ -95,11 +95,17 @@ export const NavLinkStyled = styled(NavLink)`
 
 export const UserNavLinkStyled = styled(NavLinkStyled)`
   color: var(--selective-yellow);
-
+  gap: .5rem;
   span {
     font-weight: 600;
   }
   :hover {
     text-decoration: underline;
+  }
+  button {
+    display: flex;
+    gap: .3rem;
+    justify-content: center;
+    align-items: center;
   }
 `;

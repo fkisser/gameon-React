@@ -30,7 +30,7 @@ const Hero = () => {
 					<FaLaptop />
 				</span>
 				<LogoHeroStyled>
-					<Logo />
+					<Logo big />
 				</LogoHeroStyled>
 
 				<span>

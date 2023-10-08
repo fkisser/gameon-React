@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FormContainerStyled, FormStyled } from "./ContactStyles";
 import Button from "../UI/Button/Button";
 import { Formik } from "formik";
 import Input from "../UI/Inputs/Input";
 import TextArea from "../UI/Inputs/TextArea";
 import * as Yup from "yup";
+import emailjs from "@emailjs/browser";
+import { useDispatch } from "react-redux";
+import { openModal } from "../../redux/modal/modalSlice";
 
 const validationSchema = Yup.object({
 	name: Yup.string().trim().required("Este campo es requerido"),
@@ -20,6 +23,13 @@ const validationSchema = Yup.object({
 });
 
 const FormContainer = () => {
+	const template_id = "template_1e4cdk8";
+	const service_id = "service_3rsannw";
+	const public_key = "_u9ZgN-j_wqxJ5mZK";
+	const dispatch = useDispatch();
+	const sendEmail = (values) => {
+		emailjs.send(service_id, template_id, values, public_key);
+	};
 	return (
 		<FormContainerStyled>
 			<Formik
@@ -32,7 +42,8 @@ const FormContainer = () => {
 				}}
 				validationSchema={validationSchema}
 				onSubmit={(values, { resetForm }) => {
-					console.log(values);
+					sendEmail(values);
+					dispatch(openModal("Formulario enviado"));
 					resetForm();
 				}}>
 				{({ touched, errors }) => (

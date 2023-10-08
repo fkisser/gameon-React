@@ -25,8 +25,7 @@ export const ProductsContainerStyled = styled.div`
   box-shadow: inset 0px 0px 5px 5px rgba(0, 0, 0, 0.15);
 `;
 
-export const ProductCardStyled = styled(Link)`
-  cursor: pointer;
+export const ProductCardStyled = styled.div`
   display: flex;
   justify-content: space-between;
   width: calc(33% - 1rem);
@@ -128,6 +127,7 @@ export const TxtContainerStyled = styled.div`
 
   @media (max-width: 1200px){
     font-size: large;
+    height: auto;
   }
   @media (max-width: 992px){
     font-size: medium;
@@ -139,3 +139,4 @@ export const TxtContainerStyled = styled.div`
     text-align:center;
   }
 `;
+

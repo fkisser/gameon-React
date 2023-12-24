@@ -11,7 +11,7 @@ import { orderProducts } from "../../redux/products/productsSlice";
 
 const Products = ({ starred }) => {
 	const [productsToRender, setProductsToRender] = useState([]);
-	const { products, orderBy, ascendent } = useSelector(
+	const { products, orderBy, ascendent, isLoading } = useSelector(
 		(state) => state.products
 	);
 	const { selectedCategory } = useSelector((state) => state.categories);
@@ -22,7 +22,7 @@ const Products = ({ starred }) => {
 			return selectedCategory ? product.category === selectedCategory : product;
 		});
 		setProductsToRender(filteredProducts);
-	}, [orderBy, ascendent, selectedCategory]);
+	}, [orderBy, ascendent, selectedCategory, isLoading]);
 
 	{
 		return starred ? (

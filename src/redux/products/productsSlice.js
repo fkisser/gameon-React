@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { products, totalProducts } from "../../data/products";
+// import { products, totalProducts } from "../../data/products";
 import { productsSort } from "./productsSliceUtils";
 
+
+
 const INITIAL_STATE = {
-  products: products,
-  totalProducts: totalProducts,
+  products: [],
+  totalProducts: 0,
   orderBy: "price",
-  ascendent: false
+  ascendent: false,
+  isLoading: false,
+  error: false
 }
 
 export const productsSlice = createSlice({
@@ -22,9 +26,30 @@ export const productsSlice = createSlice({
         ...state,
         products: productsSort([...products], ...action.payload)
       }
+    }),
+    fetchingProducts: ((state) => {
+      return {
+        ...state,
+        isLoading: true,
+      }
+    }),
+    successFetchingProducts: ((state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: false,
+        products: [...action.payload],
+      }
+    }),
+    errorFetchingProducts: ((state, action) => {
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      }
     })
   }
 });
 
-export const { getProducts, orderProducts } = productsSlice.actions;
+export const { getProducts, orderProducts, fetchingProducts, successFetchingProducts, errorFetchingProducts } = productsSlice.actions;
 export default productsSlice.reducer;

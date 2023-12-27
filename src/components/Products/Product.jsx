@@ -2,13 +2,15 @@ import { FaCartPlus } from "react-icons/fa6";
 import { PiMagnifyingGlassPlusBold } from "react-icons/pi";
 import Button from "../UI/Button/Button";
 import { ProductCardStyled } from "./ProductsStyles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../../redux/cart/cartSlice";
 import { closeModal, openModal } from "../../redux/modal/modalSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const Product = ({ title, description, price, url, id }) => {
+const Product = ({ title, desc, price, url, id }) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const { currentUser } = useSelector((state) => state.user);
 	return (
 		<ProductCardStyled>
 			<div className="image">
@@ -19,7 +21,7 @@ const Product = ({ title, description, price, url, id }) => {
 			</div>
 			<div className="text">
 				<h4>{title}</h4>
-				<p>{description}</p>
+				<p>{desc}</p>
 				<div>
 					<Link to={`${id}`}>
 						<Button radius="50%">
@@ -31,11 +33,15 @@ const Product = ({ title, description, price, url, id }) => {
 
 					<Button
 						onClick={() => {
-							dispatch(addItem({ title, price, url, id }));
-							dispatch(openModal("Producto agregado al carrito"));
-							setTimeout(() => {
-								dispatch(closeModal());
-							}, 1500);
+							if (!currentUser) {
+								navigate("/login");
+							} else {
+								dispatch(addItem({ title, price, url, id }));
+								dispatch(openModal("Producto agregado al carrito"));
+								setTimeout(() => {
+									dispatch(closeModal());
+								}, 1500);
+							}
 						}}
 						radius="50%">
 						<FaCartPlus />

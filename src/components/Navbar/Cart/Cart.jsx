@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	BtnsContainerStyled,
 	CartStyled,
@@ -9,15 +9,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { BiArrowBack, BiSolidTrash } from "react-icons/bi";
 import CartItem from "./CartItem";
 import Button from "../../UI/Button/Button";
-import { toggleHiddenCart } from "../../../redux/cart/cartSlice";
+import { toggleHiddenCart, updateItems } from "../../../redux/cart/cartSlice";
 import { openConfirm } from "../../../redux/modal/modalSlice";
 
 const Cart = () => {
 	const dispatch = useDispatch();
 	const { cartItems, open } = useSelector((state) => state.cart);
+	const { products, isLoading } = useSelector((state) => state.products);
 	const totalPrice = cartItems?.reduce((acc, item) => {
 		return (acc += item.price * item.quantity);
 	}, 0);
+	useEffect(() => {
+		if (products?.length && !isLoading) dispatch(updateItems(products));
+	}, [isLoading]);
 	return (
 		<CartStyled open={open}>
 			<div className="cartHeader">
@@ -31,7 +35,7 @@ const Cart = () => {
 				<h2>Tu carrito</h2>
 			</div>
 			<ProductsContainerStyled>
-				{cartItems.length ? (
+				{cartItems?.length ? (
 					cartItems.map((item) => {
 						return (
 							<CartItem
@@ -46,7 +50,7 @@ const Cart = () => {
 			</ProductsContainerStyled>
 			<TotalContainerStyled>
 				<p>Total:</p>
-				<span>${totalPrice.toFixed(2)}</span>
+				<span>${totalPrice?.toFixed(2)}</span>
 			</TotalContainerStyled>
 			<BtnsContainerStyled>
 				<Button
@@ -61,7 +65,7 @@ const Cart = () => {
 							})
 						);
 					}}
-					disabled={!cartItems.length}>
+					disabled={!cartItems?.length}>
 					<BiSolidTrash />
 				</Button>
 				<Button
@@ -76,7 +80,7 @@ const Cart = () => {
 							})
 						);
 					}}
-					disabled={!cartItems.length}>
+					disabled={!cartItems?.length}>
 					Comprar
 				</Button>
 			</BtnsContainerStyled>

@@ -10,6 +10,7 @@ import {
 	toggleHiddenCart,
 } from "../../../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { setCurrentUser } from "../../../redux/user/userSlice";
 
 const Modal = () => {
 	const { open, isConfirm, message, action, id } = useSelector(
@@ -43,6 +44,11 @@ const Modal = () => {
 								dispatch(success());
 								dispatch(clearCart());
 								navigate("/success");
+								break;
+							case "logout":
+								dispatch(clearCart());
+								dispatch(setCurrentUser(null));
+								navigate("/");
 								break;
 							default:
 								break;

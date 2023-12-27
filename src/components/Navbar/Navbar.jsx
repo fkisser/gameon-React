@@ -21,11 +21,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modals/Modal";
 import { setCurrentUser } from "../../redux/user/userSlice";
 import Button from "../UI/Button/Button";
+import { openConfirm } from "../../redux/modal/modalSlice";
 
 const Navbar = () => {
 	const { open } = useSelector((state) => state.navbar);
-	const { currentUser } = useSelector((state) => state.user);
+	const user = useSelector((state) => state.user);
+	const { cartItems } = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
+	if (!user) dispatch(setCurrentUser(null));
 	return (
 		<NavbarContainerStyled>
 			<Cart />
@@ -65,20 +68,30 @@ const Navbar = () => {
 							</motion.div>
 						</NavLinkStyled>
 
-						<UserNavLinkStyled to={currentUser ? "/user" : "/login"}>
+						<UserNavLinkStyled to={user.currentUser ? "/user" : "/login"}>
 							<span>
-								{currentUser ? `Hola ${currentUser}!` : "Iniciar sesión"}
+								{user.currentUser
+									? `Hola ${user.currentUser}!`
+									: "Iniciar sesión"}
 							</span>
 							<FaUserAlt />
-							{currentUser && (
-								<Button
-									onClick={() => {
-										currentUser ? dispatch(setCurrentUser(null)) : "";
-									}}>
-									Salir <FaPersonWalkingArrowRight />
-								</Button>
-							)}
 						</UserNavLinkStyled>
+						{user.currentUser && (
+							<Button
+								onClick={() => {
+									const msj = "Seguro/a que desea salir? Se vaciará el carrito",
+										fun = "logout";
+									dispatch(
+										openConfirm({
+											msj,
+											fun,
+										})
+									);
+								}}>
+								{" "}
+								Salir <FaPersonWalkingArrowRight />
+							</Button>
+						)}
 					</LinksContainerStyled>
 
 					<CartButton />

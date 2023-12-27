@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   totalProducts: 0,
   orderBy: "price",
   ascendent: false,
-  isLoading: false,
+  isLoading: true,
   error: false
 }
 

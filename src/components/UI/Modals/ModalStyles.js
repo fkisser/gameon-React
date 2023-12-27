@@ -32,32 +32,25 @@ export const InfoStyled = styled(DialogStyled)`
   }
 `
 export const ConfirmStyled = styled(DialogStyled)`
-  
-  gap: 1rem;
-  padding: 1rem;
+  width: fit-content;
+  bottom: ${props => (props.open ? "45vh" : "-100%")};
+  transition: bottom 0.3s linear;
+  gap: 2rem;
+  padding: 2rem;
   flex-direction: column;
   justify-content: space-around;
-  background-color: var(--dark-blue);
+  background-color: var(--mid-blue);
   color: white;
-  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .6);
-  -moz-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .6);
-  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .6);
+  -webkit-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 1);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 1);
   .confirmBtns {
     display: flex;
     gap: 1rem;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     button{
-      width: 5rem;
-    }
-    .yes {
-      color: white;
-      background-color: transparent;
-      border: .2rem solid white;
-    }
-    .no {
-      color: white;
-      background-color: var(--mid-blue);
+      width: 6rem;
     }
   }
 `

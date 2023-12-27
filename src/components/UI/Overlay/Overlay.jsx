@@ -9,7 +9,6 @@ const Overlay = () => {
 	const openNavbar = useSelector((state) => state.navbar.open);
 	const openCart = useSelector((state) => state.cart.open);
 	const openModal = useSelector((state) => state.modal.open);
-	const { isConfirm } = useSelector((state) => state.modal);
 	const dispatch = useDispatch();
 	return (
 		<>
@@ -29,7 +28,7 @@ const Overlay = () => {
 				<OverlayStyled
 					open={openModal}
 					modal={openModal}
-					onClick={() => (isConfirm ? null : dispatch(closeModal()))}
+					onClick={() => dispatch(closeModal())}
 				/>
 			)}
 		</>

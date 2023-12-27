@@ -24,5 +24,4 @@ export const getAllProducts = async (dispatch) => {
   } catch (error) {
     dispatch(errorFetchingProducts("Error al obtener productos de la base de datos"))
   }
-
 }

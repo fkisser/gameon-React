@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { CategoriesContainerStyled } from "./CategoriesStyles";
 import Category from "./Category";
 import { useDispatch, useSelector } from "react-redux";
-import MiniLoader from "../UI/Loaders/miniLoader";
+import MiniLoader from "../UI/Loaders/MiniLoader";
 import { getAllCategories } from "../../axios/categories";
 
 const Categories = () => {

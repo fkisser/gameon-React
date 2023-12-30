@@ -54,4 +54,4 @@ export const ConfirmStyled = styled(DialogStyled)`
     }
   }
 `
-
+export const LoaderStyled = styled(ConfirmStyled);

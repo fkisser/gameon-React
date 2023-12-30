@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfirmStyled, InfoStyled } from "./ModalStyles";
+import { ConfirmStyled, InfoStyled, LoaderStyled } from "./ModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../redux/modal/modalSlice";
 import Button from "../Button/Button";

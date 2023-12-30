@@ -8,14 +8,21 @@ import { CategoriesWrapperStyled } from "./CategoriesStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { orderProducts } from "../../redux/products/productsSlice";
+import BigLoader from "../UI/Loaders/BigLoader";
+import { getAllProducts } from "../../axios/products";
 
 const Products = ({ starred }) => {
-	const [productsToRender, setProductsToRender] = useState([]);
-	const { products, orderBy, ascendent, isLoading } = useSelector(
+	const { products, orderBy, ascendent, isLoading, error } = useSelector(
 		(state) => state.products
 	);
-	const { selectedCategory } = useSelector((state) => state.categories);
 	const dispatch = useDispatch();
+	useEffect(() => {
+		if (!products.length) {
+			getAllProducts(dispatch);
+		}
+	}, [dispatch, isLoading, error]);
+	const [productsToRender, setProductsToRender] = useState([]);
+	const { selectedCategory } = useSelector((state) => state.categories);
 	useEffect(() => {
 		dispatch(orderProducts([orderBy, ascendent]));
 		const filteredProducts = products.filter((product) => {
@@ -29,6 +36,11 @@ const Products = ({ starred }) => {
 			<ProductsSectionStyled>
 				<h2>Productos destacados</h2>
 				<ProductsContainerStyled>
+					{isLoading && (
+						<div>
+							<BigLoader />
+						</div>
+					)}
 					{productsToRender?.map((product) => {
 						return (
 							product.starred && (
@@ -49,6 +61,11 @@ const Products = ({ starred }) => {
 					<Categories />
 				</CategoriesWrapperStyled>
 				<ProductsContainerStyled>
+					{isLoading && (
+						<div style={{ margin: "20vh 0" }}>
+							<BigLoader />
+						</div>
+					)}
 					{productsToRender?.map((product) => {
 						return (
 							<Product

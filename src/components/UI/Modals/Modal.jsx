@@ -1,5 +1,5 @@
 import React from "react";
-import { ConfirmStyled, InfoStyled, LoaderStyled } from "./ModalStyles";
+import { ConfirmStyled, InfoStyled } from "./ModalStyles";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../../redux/modal/modalSlice";
 import Button from "../Button/Button";
@@ -10,7 +10,7 @@ import {
 	toggleHiddenCart,
 } from "../../../redux/cart/cartSlice";
 import { useNavigate } from "react-router-dom";
-import { setCurrentUser } from "../../../redux/user/userSlice";
+import { successUser } from "../../../redux/user/userSlice";
 
 const Modal = () => {
 	const { open, isConfirm, message, action, id } = useSelector(
@@ -47,7 +47,7 @@ const Modal = () => {
 								break;
 							case "logout":
 								dispatch(clearCart());
-								dispatch(setCurrentUser(null));
+								dispatch(successUser(null));
 								navigate("/");
 								break;
 							default:

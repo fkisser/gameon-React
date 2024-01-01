@@ -15,7 +15,7 @@ export const getAllCategories = async (dispatch) => {
       }
     })
     if (categories) dispatch(successFetchingCategories(categories));
-    else throw new Error("Error al obtener categorías de la base de datos")
+    else dispatch(errorFetchingCategories(response.data.msg))
   } catch (error) {
     dispatch(errorFetchingCategories("Error al obtener categorías de la base de datos"))
   }

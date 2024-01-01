@@ -20,7 +20,7 @@ export const getAllProducts = async (dispatch) => {
         }
       })
     if (products) dispatch(successFetchingProducts(products));
-    else throw new Error("Error al obtener productos de la base de datos")
+    else dispatch(errorFetchingProducts(response.data.msg))
   } catch (error) {
     dispatch(errorFetchingProducts("Error al obtener productos de la base de datos"))
   }

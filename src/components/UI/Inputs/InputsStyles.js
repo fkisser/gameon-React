@@ -64,7 +64,7 @@ export const TextAreaStyled = styled.textarea`
 `;
 export const ErrorStyled = styled.p`
   position: absolute;
-  bottom: -.8rem;
+  bottom: -1rem;
   padding-left: .5rem;
   color: var(--selective-yellow);
   font-size: x-small;

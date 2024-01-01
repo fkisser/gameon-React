@@ -19,7 +19,7 @@ import Overlay from "../UI/Overlay/Overlay";
 import Cart from "./Cart/Cart";
 import { useDispatch, useSelector } from "react-redux";
 import Modal from "../UI/Modals/Modal";
-import { setCurrentUser } from "../../redux/user/userSlice";
+import { successUser } from "../../redux/user/userSlice";
 import Button from "../UI/Button/Button";
 import { openConfirm } from "../../redux/modal/modalSlice";
 
@@ -28,7 +28,7 @@ const Navbar = () => {
 	const user = useSelector((state) => state.user);
 	const { cartItems } = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
-	if (!user) dispatch(setCurrentUser(null));
+	if (!user) dispatch(successUser(null));
 	return (
 		<NavbarContainerStyled>
 			<Cart />
@@ -71,7 +71,7 @@ const Navbar = () => {
 						<UserNavLinkStyled to={user.currentUser ? "/user" : "/login"}>
 							<span>
 								{user.currentUser
-									? `Hola ${user.currentUser}!`
+									? `Hola ${user.currentUser.name}!`
 									: "Iniciar sesión"}
 							</span>
 							<FaUserAlt />

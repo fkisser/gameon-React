@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { registerInitialValues } from "./initialValues";
 import { registerValidationSchema } from "./validationSchema";
 import { useDispatch } from "react-redux";
-import { setCurrentUser } from "../../redux/user/userSlice";
+// import { setCurrentUser } from "../../redux/user/userSlice";
 import useRedirect from "../../hooks/useRedirect";
 
 const Register = () => {
@@ -21,7 +21,7 @@ const Register = () => {
 					initialValues={registerInitialValues}
 					validationSchema={registerValidationSchema}
 					onSubmit={(values) => {
-						dispatch(setCurrentUser(values.user));
+						// dispatch(setCurrentUser(values.user));
 					}}>
 					<Form>
 						<Input

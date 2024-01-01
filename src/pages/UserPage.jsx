@@ -9,8 +9,8 @@ const UserPage = () => {
 		<ErrorStyled>
 			<Logo dev></Logo>
 			<h4>
-				Lo sentimos <span>{currentUser}</span>, aún no hay nada para ofrecerte
-				por aquí
+				Lo sentimos <span>{currentUser.name}</span>, aún no hay nada para
+				ofrecerte por aquí
 			</h4>
 		</ErrorStyled>
 	);

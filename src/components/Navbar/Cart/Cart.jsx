@@ -14,6 +14,7 @@ import { openConfirm } from "../../../redux/modal/modalSlice";
 
 const Cart = () => {
 	const dispatch = useDispatch();
+	const { isLoading: orderLoading } = useSelector((state) => state.order);
 	const { cartItems, open } = useSelector((state) => state.cart);
 	const { products, isLoading } = useSelector((state) => state.products);
 	const totalPrice = cartItems?.reduce((acc, item) => {
@@ -65,7 +66,7 @@ const Cart = () => {
 							})
 						);
 					}}
-					disabled={!cartItems?.length}>
+					disabled={!cartItems?.length || orderLoading}>
 					<BiSolidTrash />
 				</Button>
 				<Button
@@ -80,7 +81,7 @@ const Cart = () => {
 							})
 						);
 					}}
-					disabled={!cartItems?.length}>
+					disabled={!cartItems?.length || orderLoading}>
 					Comprar
 				</Button>
 			</BtnsContainerStyled>

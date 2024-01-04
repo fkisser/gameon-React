@@ -4,7 +4,7 @@ import { addProduct, removeProduct, updateProducts } from "./cartUtils";
 const INITIAL_STATE = {
   cartItems: [],
   open: false,
-  success: false
+  success: false,
 }
 
 const cartSlice = createSlice({
@@ -20,7 +20,7 @@ const cartSlice = createSlice({
     addItems: (state, action) => {
       return {
         ...state,
-        cartItems: [...action.payload]
+        cartItems: action.payload
       }
     },
     removeItem: (state, action) => {

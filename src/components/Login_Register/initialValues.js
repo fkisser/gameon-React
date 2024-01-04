@@ -1,6 +1,6 @@
 export const registerInitialValues = {
-  user: '',
-  email: '',
+  name: '',
+  mail: '',
   password: ''
 }
 

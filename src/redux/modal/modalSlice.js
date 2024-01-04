@@ -19,14 +19,15 @@ const modalSlice = createSlice({
       }
     },
     openConfirm: (state, action) => {
-      const { msj, fun, id } = action.payload
+      const { msj, fun, id, values } = action.payload
       return {
         ...state,
         open: true,
         isConfirm: true,
         message: msj,
         action: fun,
-        id: id
+        id: id,
+        values
       }
     },
     closeModal: (state) => {

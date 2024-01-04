@@ -40,7 +40,7 @@ const Login = () => {
 							name={"password"}
 							type={"password"}
 							placeholder={"Contraseña"}
-							hasError={String(error).includes("Contraseña")}
+							hasError={String(error).toLowerCase().includes("contraseña")}
 						/>
 						<Link to={"/register"}>
 							<PStyled>¿No tienes usuario? Regístrate</PStyled>

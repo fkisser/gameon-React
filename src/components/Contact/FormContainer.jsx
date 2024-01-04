@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { FormContainerStyled, FormStyled } from "./ContactStyles";
 import Button from "../UI/Button/Button";
 import { Formik } from "formik";

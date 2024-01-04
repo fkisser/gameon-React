@@ -1,18 +1,15 @@
 import React from "react";
-import { ErrorStyled } from "../components/UI/Error/ErrorStyles";
-import Logo from "../components/UI/Logo/Logo";
 import { useSelector } from "react-redux";
+import UserOrders from "../components/Profile/UserOrders";
+import UserData from "../components/Profile/UserData";
+import { UserProfileStyled } from "../components/Profile/ProfileStyles";
 
 const UserPage = () => {
-	const { currentUser } = useSelector((state) => state.user);
 	return (
-		<ErrorStyled>
-			<Logo dev></Logo>
-			<h4>
-				Lo sentimos <span>{currentUser.name}</span>, aún no hay nada para
-				ofrecerte por aquí
-			</h4>
-		</ErrorStyled>
+		<UserProfileStyled>
+			<UserData />
+			<UserOrders />
+		</UserProfileStyled>
 	);
 };
 

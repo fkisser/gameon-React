@@ -3,10 +3,11 @@ import { Formik } from "formik";
 import Input from "../UI/Inputs/Input";
 import TextArea from "../UI/Inputs/TextArea";
 import * as Yup from "yup";
-import { DataStyled } from "./CheckoutStyles";
+import { ButtonsContainerStyled, DataStyled } from "./CheckoutStyles";
 import { FormStyled } from "../Contact/ContactStyles";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openConfirm } from "../../redux/modal/modalSlice";
+import { backToCartOrder } from "../../axios/orders";
 
 const validationSchema = Yup.object({
 	name: Yup.string().trim().required("Este campo es requerido"),
@@ -14,18 +15,20 @@ const validationSchema = Yup.object({
 	dni: Yup.number()
 		.min(1000000, "El DNI debe ser superior a 1.000.000")
 		.required("Este campo es requerido"),
-	email: Yup.string()
+	mail: Yup.string()
 		.email("Correo electrónico inválido")
 		.required("Este campo es requerido"),
 	address: Yup.string()
 		.trim()
 		.max(250, "Máximo de 250 caracteres")
 		.required("Este campo es requerido"),
-	comments: Yup.string().trim().max(500, "Máximo de 500 caracteres"),
+	details: Yup.string().trim().max(500, "Máximo de 500 caracteres"),
 });
 
 const Data = () => {
 	const dispatch = useDispatch();
+	const { currentUser } = useSelector((state) => state.user);
+	const { isLoading } = useSelector((state) => state.order);
 	return (
 		<DataStyled>
 			<Formik
@@ -33,23 +36,21 @@ const Data = () => {
 					name: "",
 					lname: "",
 					dni: "",
-					email: "",
+					mail: "",
 					address: "",
-					comments: "",
+					details: "",
 				}}
 				validationSchema={validationSchema}
-				onSubmit={({ resetForm }) => {
-					const msj = "Desea confirmar su compra?",
-						fun = "success";
+				onSubmit={(values) => {
 					dispatch(
 						openConfirm({
-							msj,
-							fun,
+							msj: "Desea confirmar su compra?",
+							fun: "success",
+							values,
 						})
 					);
-					resetForm();
 				}}>
-				{({ touched, errors }) => (
+				{({ touched, errors, values }) => (
 					<FormStyled>
 						<h2>Tus datos</h2>
 						<div className="group">
@@ -77,9 +78,9 @@ const Data = () => {
 
 							<Input
 								type="email"
-								name="email"
+								name="mail"
 								placeholder="Mail"
-								hasError={errors.email && touched.email}
+								hasError={errors.mail && touched.mail}
 							/>
 						</div>
 
@@ -92,14 +93,38 @@ const Data = () => {
 						/>
 
 						<TextArea
-							name="comments"
+							name="details"
 							cols="30"
 							rows="3"
 							placeholder="Algún dato que consideres importante..."
-							hasError={errors.comments && touched.comments}
+							hasError={errors.details && touched.details}
 						/>
-
-						<Button type="submit">Comprar</Button>
+						<ButtonsContainerStyled className="buttons">
+							<Button
+								disabled={isLoading}
+								type="button"
+								onClick={() => {
+									backToCartOrder(dispatch, currentUser.token);
+								}}>
+								{"< Volver"}
+							</Button>
+							<Button
+								disabled={isLoading}
+								type="submit"
+								onClick={() => {
+									const msj = "Desea confirmar su compra?",
+										fun = "success";
+									dispatch(
+										openConfirm({
+											msj,
+											fun,
+											values,
+										})
+									);
+								}}>
+								Comprar
+							</Button>
+						</ButtonsContainerStyled>
 					</FormStyled>
 				)}
 			</Formik>

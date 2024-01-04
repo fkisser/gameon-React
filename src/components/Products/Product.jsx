@@ -3,14 +3,16 @@ import { PiMagnifyingGlassPlusBold } from "react-icons/pi";
 import Button from "../UI/Button/Button";
 import { ProductCardStyled } from "./ProductsStyles";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../../redux/cart/cartSlice";
+import { addItem, addItems } from "../../redux/cart/cartSlice";
 import { closeModal, openModal } from "../../redux/modal/modalSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Product = ({ title, desc, price, url, id }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const { currentUser } = useSelector((state) => state.user);
+	const { isLoading } = useSelector((state) => state.order);
+	const location = useLocation();
 	return (
 		<ProductCardStyled>
 			<div className="image">
@@ -23,15 +25,24 @@ const Product = ({ title, desc, price, url, id }) => {
 				<h4>{title}</h4>
 				<p>{desc}</p>
 				<div>
-					<Link to={`${id}`}>
-						<Button radius="50%">
-							<PiMagnifyingGlassPlusBold />
-						</Button>
-					</Link>
+					{location.pathname === "/" ? (
+						<Link to={`products/${id}`}>
+							<Button radius="50%">
+								<PiMagnifyingGlassPlusBold />
+							</Button>
+						</Link>
+					) : (
+						<Link to={`${id}`}>
+							<Button radius="50%">
+								<PiMagnifyingGlassPlusBold />
+							</Button>
+						</Link>
+					)}
 
 					<p className="price">${price}</p>
 
 					<Button
+						disabled={isLoading}
 						onClick={() => {
 							if (!currentUser) {
 								navigate("/login");

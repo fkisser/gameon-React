@@ -9,7 +9,7 @@ const Button = ({
 	type,
 }) => {
 	return (
-		<motion.div whileTap={{ scale: 0.95 }}>
+		<motion.div whileTap={{ scale: 0.99 }}>
 			<StyledButton
 				type={type}
 				disabled={disabled}

@@ -22,14 +22,16 @@ import Modal from "../UI/Modals/Modal";
 import { successUser } from "../../redux/user/userSlice";
 import Button from "../UI/Button/Button";
 import { openConfirm } from "../../redux/modal/modalSlice";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
 	const { open } = useSelector((state) => state.navbar);
 	const user = useSelector((state) => state.user);
-	const { cartItems } = useSelector((state) => state.cart);
 	const dispatch = useDispatch();
 	if (!user) dispatch(successUser(null));
-	return (
+	const location = useLocation();
+
+	return location.pathname !== "/checkout" ? (
 		<NavbarContainerStyled>
 			<Cart />
 			<NavbarContentWrapperStyled>
@@ -93,10 +95,15 @@ const Navbar = () => {
 							</Button>
 						)}
 					</LinksContainerStyled>
-
 					<CartButton />
 					<MenuButton />
 				</span>
+			</NavbarContentWrapperStyled>
+		</NavbarContainerStyled>
+	) : (
+		<NavbarContainerStyled>
+			<NavbarContentWrapperStyled>
+				<Modal />
 			</NavbarContentWrapperStyled>
 		</NavbarContainerStyled>
 	);

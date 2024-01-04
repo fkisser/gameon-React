@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const INITIAL_STATE = {
-  checkoutItems: [],
+  checkoutOrder: null,
   open: false
 }
 
@@ -9,23 +9,23 @@ const checkoutSlice = createSlice({
   name: 'checkout',
   initialState: INITIAL_STATE,
   reducers: {
-    addItems: (state, action) => {
+    addCheckoutOrder: (state, action) => {
       return {
         ...state,
-        checkoutItems: [...action.payload]
+        checkoutOrder: action.payload
       }
     },
-    clearItems: (state) => {
+    clearOrder: (state) => {
       return {
         ...state,
-        checkoutItems: [],
+        checkoutOrder: null,
       }
     }
   }
 })
 
 export const {
-  addItems, clearItems
+  addCheckoutOrder, clearOrder
 } = checkoutSlice.actions;
 
 export default checkoutSlice.reducer;

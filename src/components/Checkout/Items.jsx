@@ -1,32 +1,50 @@
 import React from "react";
-import CartItem from "../Navbar/Cart/CartItem";
 import {
 	ItemsContainerStyled,
 	ItemsStyled,
+	SubtotalStyled,
 	TotalStyled,
 } from "./CheckoutStyles";
 import { useSelector } from "react-redux";
+import Item from "./Item";
 
 const Items = () => {
-	const { cartItems } = useSelector((state) => state.cart);
-	const totalPrice = cartItems?.reduce((acc, item) => {
-		return (acc += item.price * item.quantity);
-	}, 0);
+	const { checkoutOrder } = useSelector((state) => state.checkout);
 	return (
 		<ItemsContainerStyled>
 			<ItemsStyled>
-				{cartItems.map((item) => {
+				{checkoutOrder?.items.map((item) => {
+					const { _id: id, title, desc, price, url } = item.product;
+					const { quantity } = item;
+					const checkoutItem = {
+						url,
+						title,
+						desc,
+						price,
+						quantity,
+						id,
+					};
 					return (
-						<CartItem
-							key={item.id}
-							{...item}
+						<Item
+							key={id}
+							{...checkoutItem}
 						/>
 					);
 				})}
 			</ItemsStyled>
+			<SubtotalStyled>
+				<p>Subtotal:</p>
+				<span>${(checkoutOrder?.price).toFixed(2)}</span>
+			</SubtotalStyled>
+			<SubtotalStyled>
+				<p>Costo de envío:</p>
+				<span>${checkoutOrder?.shippingCost}</span>
+			</SubtotalStyled>
 			<TotalStyled>
 				<p>Total:</p>
-				<span>${totalPrice.toFixed(2)}</span>
+				<span>
+					${(checkoutOrder?.price + checkoutOrder?.shippingCost).toFixed(2)}
+				</span>
 			</TotalStyled>
 		</ItemsContainerStyled>
 	);

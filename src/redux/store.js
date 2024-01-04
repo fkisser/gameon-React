@@ -8,7 +8,8 @@ import cartReducer from "./cart/cartSlice";
 import navbarReducer from "./navbar/navbarSlice";
 import modalReducer from "./modal/modalSlice";
 import checkoutReducer from "./checkout/checkoutSlice";
-import userReducer from "./user/userSlice"
+import userReducer from "./user/userSlice";
+import orderReducer from "./order/orderSlice";
 
 const reducers = combineReducers({
   categories: categoriesReducer,
@@ -17,13 +18,14 @@ const reducers = combineReducers({
   navbar: navbarReducer,
   modal: modalReducer,
   checkout: checkoutReducer,
-  user: userReducer
+  user: userReducer,
+  order: orderReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart", "user"]
+  whitelist: ["cart", "user", "checkout"]
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)
